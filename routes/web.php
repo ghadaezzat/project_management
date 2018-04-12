@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('companies','CompaniesController');
 
 Route::resource('projects','ProjectsController');
+Route::resource('comments','CommentsController');
+
 Route::get('/projects/create/{company_id?}', 'ProjectsController@create');
 
 

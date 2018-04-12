@@ -13,16 +13,22 @@
 
         {{--  <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>  --}}
       </div>
+      <div class="container-fluid">
       <div class="row" style="background:white;margin:10px;">
         {{--  <a href="/comments/create" class="btn btn-default btn-sm pull-right">Add comment</a>  --}}
+@foreach ($project->comments as $comment)
+{{$comment->user->first_name}} {{$comment->user->last_name}} 
+{{$comment->body}}
+<br/>
+@endforeach
 
-          <form method="post" action="{{ route('comemnts.store') }}">
+          <form method="post" action="{{ route('comments.store') }}">
                                 {{ csrf_field() }}
                                 <input   
                                 class="form-control"
                                 type="hidden"
-                                        name="commentable"
-                                        value="Project"
+                                        name="commentable_type"
+                                        value="App\Project"
                                          />
                                 <input   
                                 class="form-control"
@@ -30,12 +36,7 @@
                                         name="commentable_id"
                                         value="{{ $project->id }}"
                                                   />
-                                <input   
-                                class="form-control"
-                                type="hidden"
-                                        name="user_id"
-                                        value="{{ Auth::user()->id }}"
-                                          />
+                             
                                 {{--  <div class='form-group'>
                                     <label for="company_name">Name<span class="required">*</span></label>
                                     <input 
@@ -55,7 +56,7 @@
     
     
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="body">comment</label>
                                     <textarea placeholder="Enter description" 
                                               style="resize: vertical" 
                                               id="body"
@@ -80,6 +81,7 @@
     
           
       </div>
+    </div>
 
       <!-- Example row of columns -->
       <footer class="footer">
